@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import TicTacToe from '../components/TicTacToe.vue'
+import Wordle from '../components/Wordle.vue'
 </script>
 
 <template>
   <main>
-    <TicTacToe />
+    <Wordle />
   </main>
 </template>
