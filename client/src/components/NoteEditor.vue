@@ -53,7 +53,7 @@ Axios.get(`/Note/GetNoteById?id=${id}`).then((result) => {
   note.value = result.data
 })
 
-const currentNote = ref<INote>({ title: '', content: '', date: '' })
+const currentNote = ref<INote>({ title: '', content: '', created: '' })
 
 const editNoteTitle = (text: string) => {
   currentNote.value.title = text

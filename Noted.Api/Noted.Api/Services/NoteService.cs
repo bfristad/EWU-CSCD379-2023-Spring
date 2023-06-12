@@ -81,6 +81,7 @@ namespace Noted.Api.Services
             }
 
             storedNote.deleted = true;
+            storedNote.DeletedDate = DateTime.Now;
 
             _db.SaveChanges();
         }
