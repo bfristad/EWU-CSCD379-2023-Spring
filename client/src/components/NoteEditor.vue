@@ -18,18 +18,30 @@
         >
           <div>
             <v-text-field
-              :model-value="note?.title"
+              :model-value="currentNote?.title"
               @input="editNoteTitle($event.target.value)"
               variant="underlined"
             ></v-text-field>
             <v-textarea
-              :model-value="note?.content"
+              :model-value="currentNote?.content"
               @input="editNoteContent($event.target.value)"
               variant="outlined"
               style="display: flex; flex-direction: column; flex-grow: 1; width: 500px"
             ></v-textarea>
-            <div style="display: flex; justify-content: right">
-              <v-btn @click="handleSave()">Save</v-btn>
+
+            <div style="display: flex; justify-content: right; gap: 10px">
+              <v-btn @click="deleteNote()" to="/">
+                <div style="display: flex; align-items: center; gap: 10px">
+                  <v-icon icon="mdi-delete" />
+                  <div>Delete</div>
+                </div>
+              </v-btn>
+              <v-btn @click="handleSave()" to="/">
+                <div style="display: flex; align-items: center; gap: 10px">
+                  <v-icon icon="mdi-content-save-outline" />
+                  <div>Save</div>
+                </div>
+              </v-btn>
             </div>
           </div>
         </v-card>
@@ -44,16 +56,15 @@ import axios from 'axios'
 import Axios from 'axios'
 import { ref } from 'vue'
 import { useRoute } from 'vue-router'
-const note = ref<INote>()
 
 const route = useRoute()
 const id = route.path.split('/')[2]
 
 Axios.get(`/Note/GetNoteById?id=${id}`).then((result) => {
-  note.value = result.data
+  currentNote.value = result.data
 })
 
-const currentNote = ref<INote>({ title: '', content: '', date: '' })
+const currentNote = ref<INote>({ title: '', content: '', created: '' })
 
 const editNoteTitle = (text: string) => {
   currentNote.value.title = text
@@ -61,6 +72,11 @@ const editNoteTitle = (text: string) => {
 
 const editNoteContent = (text: string) => {
   currentNote.value.content = text
+}
+
+const deleteNote = () => {
+  console.log(currentNote.value.id)
+  currentNote.value.id && Axios.delete(`/Note/Delete?id=${currentNote.value.id}`)
 }
 
 const createNote = () => {
