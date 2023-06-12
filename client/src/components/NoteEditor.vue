@@ -59,9 +59,11 @@ import { useRoute } from 'vue-router'
 const route = useRoute()
 const id = route.path.split('/')[2]
 
-Axios.get(`/Note/GetNoteById?id=${id}`).then((result) => {
-  currentNote.value = result.data
-})
+if (id) {
+  Axios.get(`/Note/GetNoteById?id=${id}`).then((result) => {
+    currentNote.value = result.data
+  })
+}
 
 const currentNote = ref<INote>({ title: '', content: '', created: '' })
 

@@ -23,14 +23,16 @@
             <div style="display: flex; align-items: center; gap: 20px">
               <div>Date Deleted: {{ note.deletedDate?.split('T', 1).toString() }}</div>
               <v-hover>
-                <template v-slot:default="{ isHovering, props }">
-                  <v-icon
-                    v-bind="props"
-                    :color="isHovering ? 'red' : 'secondary'"
-                    icon="mdi-delete-restore"
-                    @click="RestoreNote($event, note.id)"
-                  />
-                </template>
+                <v-tooltip text="Restore">
+                  <template v-slot:activator="{ isHovering, props }">
+                    <v-icon
+                      v-bind="props"
+                      :color="isHovering ? 'red' : 'secondary'"
+                      icon="mdi-delete-restore"
+                      @click="RestoreNote($event, note.id)"
+                    />
+                  </template>
+                </v-tooltip>
               </v-hover>
             </div>
           </div> </v-list-item></v-list></v-card
