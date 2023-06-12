@@ -85,5 +85,19 @@ namespace Noted.Api.Services
 
             _db.SaveChanges();
         }
+
+        public void RestoreNote(Guid id)
+        {
+            var noteToRestore = _db.Notes.Where(n => n.Id == id).First();
+
+            if (noteToRestore == null)
+            {
+                throw new Exception("Id not found");
+            }
+
+            noteToRestore.deleted = false;
+
+            _db.SaveChanges();
+        }
     }
 }

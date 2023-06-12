@@ -50,5 +50,11 @@ namespace Noted.Api.Controllers
         {
             _noteService.DeleteNote(id);
         }
+
+        [HttpPut("RestoreNote")]
+        public void RestoreNote(Guid id)
+        {
+            _noteService.RestoreNote(id);
+        }
     }
 }

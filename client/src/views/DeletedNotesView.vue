@@ -21,29 +21,38 @@
             {{ note.title }}
             <div style="display: flex; align-items: center; gap: 20px">
               <div>Date Deleted: {{ note.deletedDate?.split('T', 1).toString() }}</div>
+              <v-hover>
+                <template v-slot:default="{ isHovering, props }">
+                  <v-icon
+                    v-bind="props"
+                    :color="isHovering ? 'red' : 'secondary'"
+                    icon="mdi-delete-restore"
+                    @click="RestoreNote($event, note.id)"
+                  />
+                </template>
+              </v-hover>
             </div>
-          </div>
-        </v-list-item></v-list
-      ></v-card
-    ></v-container
-  >
+          </div> </v-list-item></v-list></v-card
+  ></v-container>
 </template>
 
 <script setup lang="ts">
 import Axios from 'axios'
 import { ref } from 'vue'
+import type { INote } from './HomeView.vue'
 
 const notes = ref<INote[]>([])
 
-export interface INote {
-  id?: number
-  title: string
-  content: string
-  date: string
-  deletedDate?: string
+const RestoreNote = async (e: any, id: string) => {
+  e.preventDefault()
+  await Axios.put(`/Note/RestoreNote?id=${id}`)
+  await GetDeletedNotes()
+}
+const GetDeletedNotes = () => {
+  Axios.get('/Note/GetDeletedNotes').then((result) => {
+    notes.value = result.data as INote[]
+  })
 }
 
-Axios.get('/Note/GetDeletedNotes').then((result) => {
-  notes.value = result.data as INote[]
-})
+GetDeletedNotes()
 </script>
