@@ -46,9 +46,9 @@ namespace Noted.Api.Controllers
         }
 
         [HttpDelete("Delete")]
-        public void DeleteNote([FromBody] NoteDto note)
+        public void DeleteNote(Guid id)
         {
-            _noteService.DeleteNote(note);
+            _noteService.DeleteNote(id);
         }
     }
 }

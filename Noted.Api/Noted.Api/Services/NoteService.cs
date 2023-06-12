@@ -70,14 +70,10 @@ namespace Noted.Api.Services
             _db.SaveChanges();
         }
 
-        public void DeleteNote(NoteDto note)
+        public void DeleteNote(Guid id)
         {
-            if(note == null)
-            {
-                throw new ArgumentNullException(nameof(note));
-            }
 
-            var storedNote = _db.Notes.Select(n => n).Where(n => n.Id == note.Id).First();
+            var storedNote = _db.Notes.Where(n => n.Id == id).First();
 
             if (storedNote == null)
             {

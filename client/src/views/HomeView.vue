@@ -21,7 +21,7 @@
             {{ note.title }}
             <div style="display: flex; align-items: center; gap: 20px">
               <div>Date Created: {{ note.created.split('T', 1).toString() }}</div>
-              <v-btn icon="mdi-delete" @click="deleteNote(note.id)" />
+              <v-btn icon="mdi-delete" @click="deleteNote($event, note.id)" />
             </div>
           </div> </v-list-item></v-list></v-card
   ></v-container>
@@ -40,11 +40,10 @@ export interface INote {
   created: string
 }
 
-const deleteNote = (id: string) => {
+const deleteNote = (e: any, id: string) => {
+  e.preventDefault()
   console.log(id)
-  // Axios.delete('/Note/Delete').then(result) => {
-
-  // }
+  Axios.delete(`/Note/Delete?id${id}`)
 }
 
 Axios.get('/Note/Get').then((result) => {
