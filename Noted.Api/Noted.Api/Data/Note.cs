@@ -11,6 +11,8 @@ namespace Noted.Api.Data
         public DateTime Created { get; set; }
         public bool deleted { get; set; } 
 
+        public DateTime DeletedDate { get; set; }
+
         public Note()
         {
             this.Created = DateTime.UtcNow;

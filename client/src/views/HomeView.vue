@@ -47,6 +47,7 @@ export interface INote {
   title: string
   content: string
   created: string
+  deletedDate?: string
 }
 
 const deleteNote = async (e: any, id: string) => {

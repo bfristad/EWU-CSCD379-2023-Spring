@@ -81,6 +81,21 @@ namespace Noted.Api.Services
             }
 
             storedNote.deleted = true;
+            storedNote.DeletedDate = DateTime.Now;
+
+            _db.SaveChanges();
+        }
+
+        public void RestoreNote(Guid id)
+        {
+            var noteToRestore = _db.Notes.Where(n => n.Id == id).First();
+
+            if (noteToRestore == null)
+            {
+                throw new Exception("Id not found");
+            }
+
+            noteToRestore.deleted = false;
 
             _db.SaveChanges();
         }
