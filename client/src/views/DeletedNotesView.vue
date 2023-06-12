@@ -12,10 +12,11 @@
             append-inner-icon="mdi-magnify"
             single-line
             hide-details
+            @input="SetSearchParams($event.target.value)"
           ></v-text-field
           ><v-btn to="/note-editor">Create Note</v-btn>
         </div></v-card-title
-      ><v-list v-for="note in notes" :key="note.id"
+      ><v-list v-for="note in notes.filter((e) => e.title.startsWith(searchParams))" :key="note.id"
         ><v-list-item rounded="xl" class="mx-auto" :to="'/note-editor/' + note.id">
           <div style="display: flex; justify-content: space-between; align-items: center">
             {{ note.title }}
@@ -42,6 +43,11 @@ import { ref } from 'vue'
 import type { INote } from './HomeView.vue'
 
 const notes = ref<INote[]>([])
+const searchParams = ref<string>('')
+
+const SetSearchParams = (text: string) => {
+  searchParams.value = text
+}
 
 const RestoreNote = async (e: any, id: string) => {
   e.preventDefault()

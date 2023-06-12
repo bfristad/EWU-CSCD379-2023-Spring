@@ -40,7 +40,6 @@
 
 <script setup lang="ts">
 import type { INote } from '@/views/HomeView.vue'
-import axios from 'axios'
 import Axios from 'axios'
 import { ref } from 'vue'
 import { useRoute } from 'vue-router'
