@@ -31,7 +31,7 @@ namespace Noted.Api.Services
             
             if(note.Title == "")
             {
-                note.Title = "Note";
+                note.Title = "Untitled Note";
             }
             newNote.Title = note.Title;
             newNote.Content = note.Content;
