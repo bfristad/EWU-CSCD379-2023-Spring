@@ -20,6 +20,11 @@ namespace Noted.Api.Controllers
         {
             return _noteService.GetNotes();
         }
+        [HttpGet("GetNoteById")]
+        public Note GetNoteById(Guid id)
+        {
+            return _noteService.GetNoteById(id);
+        }
 
         [HttpPost("Add")]
         public void AddNote([FromBody] NoteDto note)

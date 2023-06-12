@@ -17,6 +17,10 @@ namespace Noted.Api.Services
             return _db.Notes.ToList();
         }
 
+        public Note GetNoteById(Guid id)
+        {
+            return _db.Notes.Where(note => note.Id == id).First();
+        }
         public void AddNote(NoteDto note)
         {
             if(note == null)

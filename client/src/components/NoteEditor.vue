@@ -18,10 +18,12 @@
         >
           <div>
             <v-text-field
+              :model-value="note?.title"
               @input="editNoteTitle($event.target.value)"
               variant="underlined"
             ></v-text-field>
             <v-textarea
+              :model-value="note?.content"
               @input="editNoteContent($event.target.value)"
               variant="outlined"
               style="display: flex; flex-direction: column; flex-grow: 1; width: 500px"
@@ -38,8 +40,18 @@
 
 <script setup lang="ts">
 import type { INote } from '@/views/HomeView.vue'
+import axios from 'axios'
 import Axios from 'axios'
 import { ref } from 'vue'
+import { useRoute } from 'vue-router'
+const note = ref<INote>()
+
+const route = useRoute()
+const id = route.path.split('/')[2]
+
+Axios.get(`/Note/GetNoteById?id=${id}`).then((result) => {
+  note.value = result.data
+})
 
 const currentNote = ref<INote>({ title: '', content: '', date: '' })
 
