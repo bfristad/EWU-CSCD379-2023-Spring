@@ -14,7 +14,7 @@ namespace Noted.Api.Services
 
         public IEnumerable<Note> GetNotes() 
         {
-            return _db.Notes.ToList();
+            return _db.Notes.Where(note => note.deleted == false).ToList();
         }
 
         public Note GetNoteById(Guid id)
