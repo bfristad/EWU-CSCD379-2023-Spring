@@ -43,7 +43,7 @@ export interface INote {
 const deleteNote = (e: any, id: string) => {
   e.preventDefault()
   console.log(id)
-  Axios.delete(`/Note/Delete?id${id}`)
+  Axios.delete(`/Note/Delete?id=${id}`)
 }
 
 Axios.get('/Note/Get').then((result) => {
