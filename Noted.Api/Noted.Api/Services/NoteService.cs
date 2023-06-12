@@ -21,6 +21,11 @@ namespace Noted.Api.Services
         {
             return _db.Notes.Where(note => note.Id == id).First();
         }
+
+        public IEnumerable<Note> GetDeletedNotes()
+        {
+            return _db.Notes.Where(note => note.deleted == true).ToList();
+        }
         public void AddNote(NoteDto note)
         {
             if(note == null)

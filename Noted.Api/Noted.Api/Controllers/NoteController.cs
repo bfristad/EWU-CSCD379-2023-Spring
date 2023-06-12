@@ -20,10 +20,17 @@ namespace Noted.Api.Controllers
         {
             return _noteService.GetNotes();
         }
+
         [HttpGet("GetNoteById")]
         public Note GetNoteById(Guid id)
         {
             return _noteService.GetNoteById(id);
+        }
+
+        [HttpGet("GetDeletedNotes")]
+        public IEnumerable<Note> GetDeletedNotes(Guid id)
+        {
+            return _noteService.GetDeletedNotes();
         }
 
         [HttpPost("Add")]

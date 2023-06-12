@@ -12,6 +12,18 @@
           <template v-slot:activator="{ props }">
             <v-btn icon="mdi-menu" v-bind="props" />
           </template>
+          <v-list width="200">
+            <v-list-item>
+              <v-list-item-title>
+                <RouterLink :to="{ name: 'home' }"> Notes </RouterLink>
+              </v-list-item-title>
+            </v-list-item>
+            <v-list-item>
+              <v-list-item-title>
+                <RouterLink :to="{ name: 'DeletedNotes' }"> Deleted Notes </RouterLink>
+              </v-list-item-title>
+            </v-list-item>
+          </v-list>
         </v-menu>
       </template>
     </v-app-bar>
