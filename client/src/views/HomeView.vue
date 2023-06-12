@@ -21,7 +21,16 @@
             {{ note.title }}
             <div style="display: flex; align-items: center; gap: 20px">
               <div>Date Created: {{ note.created.split('T', 1).toString() }}</div>
-              <v-btn icon="mdi-delete" @click="deleteNote($event, note.id)" />
+              <v-hover>
+                <template v-slot:default="{ isHovering, props }">
+                  <v-icon
+                    v-bind="props"
+                    :color="isHovering ? 'red' : 'secondary'"
+                    icon="mdi-delete"
+                    @click="deleteNote($event, note.id)"
+                  />
+                </template>
+              </v-hover>
             </div>
           </div> </v-list-item></v-list></v-card
   ></v-container>
@@ -40,14 +49,16 @@ export interface INote {
   created: string
 }
 
-const deleteNote = (e: any, id: string) => {
+const deleteNote = async (e: any, id: string) => {
   e.preventDefault()
-  console.log(id)
-  Axios.delete(`/Note/Delete?id=${id}`)
+  await Axios.delete(`/Note/Delete?id=${id}`)
+  await getNotes()
 }
-
-Axios.get('/Note/Get').then((result) => {
-  notes.value = result.data as INote[]
-  console.log(notes.value)
-})
+const getNotes = () => {
+  Axios.get('/Note/Get').then((result) => {
+    notes.value = result.data as INote[]
+    console.log(notes.value)
+  })
+}
+getNotes()
 </script>
