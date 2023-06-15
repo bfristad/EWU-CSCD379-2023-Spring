@@ -1,5 +1,5 @@
 <template>
-  <v-container
+  <v-container style="margin: 10px"
     ><v-card
       ><v-card-title style="display: flex; justify-content: space-between"
         ><div>Notes:</div>
