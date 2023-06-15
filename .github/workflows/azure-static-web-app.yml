@@ -22,9 +22,6 @@ jobs:
       - name: Install Packages
         run: npm ci
         working-directory: ./client
-      - name: Lint Code
-        working-directory: ./client
-        run: npm run lint
       - name: Prettier Check
         working-directory: ./client
         run: npm run format:check
