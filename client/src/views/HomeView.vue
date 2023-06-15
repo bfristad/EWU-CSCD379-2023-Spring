@@ -3,7 +3,7 @@
     ><v-card
       ><v-card-title style="display: flex; justify-content: space-between"
         ><div>Notes:</div>
-        <div style="display: flex; gap: 10">
+        <div style="display: flex; gap: 10px">
           <v-text-field
             style="width: 200px"
             density="compact"
