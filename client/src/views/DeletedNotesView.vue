@@ -17,7 +17,7 @@
           ><v-btn to="/note-editor">Create Note</v-btn>
         </div></v-card-title
       ><v-list v-for="note in notes.filter((e) => e.title.startsWith(searchParams))" :key="note.id"
-        ><v-list-item rounded="xl" class="mx-auto" :to="'/note-editor/' + note.id">
+        ><v-list-item rounded="xl" class="mx-auto" @click="void 0">
           <div style="display: flex; justify-content: space-between; align-items: center">
             {{ note.title }}
             <div style="display: flex; align-items: center; gap: 20px">

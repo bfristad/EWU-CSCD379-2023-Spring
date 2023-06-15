@@ -22,6 +22,7 @@
               @input="editNoteTitle($event.target.value)"
               variant="underlined"
               placeholder="insert title..."
+              :error-messages="emptyTitleError ? 'Note must contain title' : ''"
             ></v-text-field>
             <v-textarea
               :model-value="currentNote?.content"
@@ -37,7 +38,7 @@
                   <div>Delete</div>
                 </div>
               </v-btn>
-              <v-btn @click="handleSave()" to="/">
+              <v-btn @click="handleSave()">
                 <div style="display: flex; align-items: center; gap: 10px">
                   <v-icon icon="mdi-content-save-outline" />
                   <div>Save</div>
@@ -52,6 +53,7 @@
 </template>
 
 <script setup lang="ts">
+import router from '@/router'
 import type { INote } from '@/views/HomeView.vue'
 import Axios from 'axios'
 import { ref } from 'vue'
@@ -59,6 +61,7 @@ import { useRoute } from 'vue-router'
 
 const route = useRoute()
 const id = route.path.split('/')[2]
+const emptyTitleError = ref<boolean>(false)
 
 if (id) {
   Axios.get(`/Note/GetNoteById?id=${id}`).then((result) => {
@@ -91,6 +94,11 @@ const updateNote = () => {
 }
 
 const handleSave = () => {
-  currentNote.value.id ? updateNote() : createNote()
+  if (currentNote.value.title !== '') {
+    currentNote.value.id ? updateNote() : createNote()
+    router.push('/')
+  } else {
+    emptyTitleError.value = true
+  }
 }
 </script>
