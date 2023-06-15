@@ -25,13 +25,8 @@
 
               <v-hover>
                 <v-tooltip text="Delete">
-                  <template v-slot:activator="{ isHovering, props }">
-                    <v-icon
-                      v-bind="props"
-                      :color="isHovering ? 'red' : 'secondary'"
-                      icon="mdi-delete"
-                      @click="deleteNote($event, note.id)"
-                    />
+                  <template v-slot:activator="{ props }">
+                    <v-icon v-bind="props" icon="mdi-delete" @click="deleteNote($event, note.id)" />
                   </template>
                 </v-tooltip>
               </v-hover>
@@ -44,16 +39,16 @@
 import Axios from 'axios'
 import { ref } from 'vue'
 
-const notes = ref<INote[]>([])
-const searchParams = ref<string>('')
-
-export interface INote {
+interface INote {
   id: string
   title: string
   content: string
   created: string
   deletedDate?: string
 }
+
+const notes = ref<INote[]>([])
+const searchParams = ref<string>('')
 
 const SetSearchParams = (text: string) => {
   searchParams.value = text

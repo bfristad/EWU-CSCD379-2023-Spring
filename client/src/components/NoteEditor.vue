@@ -54,10 +54,17 @@
 
 <script setup lang="ts">
 import router from '@/router'
-import type { INote } from '@/views/HomeView.vue'
 import Axios from 'axios'
 import { ref } from 'vue'
 import { useRoute } from 'vue-router'
+
+interface INote {
+  id?: string
+  title: string
+  content: string
+  created: string
+  deletedDate?: string
+}
 
 const route = useRoute()
 const id = route.path.split('/')[2]

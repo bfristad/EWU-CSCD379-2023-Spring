@@ -24,10 +24,9 @@
               <div>Date Deleted: {{ note.deletedDate?.split('T', 1).toString() }}</div>
               <v-hover>
                 <v-tooltip text="Restore">
-                  <template v-slot:activator="{ isHovering, props }">
+                  <template v-slot:activator="{ props }">
                     <v-icon
                       v-bind="props"
-                      :color="isHovering ? 'red' : 'secondary'"
                       icon="mdi-delete-restore"
                       @click="RestoreNote($event, note.id)"
                     />
@@ -42,7 +41,14 @@
 <script setup lang="ts">
 import Axios from 'axios'
 import { ref } from 'vue'
-import type { INote } from './HomeView.vue'
+
+interface INote {
+  id: string
+  title: string
+  content: string
+  created: string
+  deletedDate?: string
+}
 
 const notes = ref<INote[]>([])
 const searchParams = ref<string>('')
