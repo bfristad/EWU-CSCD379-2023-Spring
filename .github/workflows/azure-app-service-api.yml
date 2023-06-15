@@ -25,11 +25,11 @@ jobs:
           include-prerelease: true
 
       - name: Build with dotnet
-        working-directory: ./Noted.Api
+        working-directory: ./Noted.Api/Noted.Api
         run: dotnet build --configuration Release
 
       - name: dotnet publish
-        working-directory: ./Noted.Api
+        working-directory: ./Noted.Api/Noted.Api
         run: dotnet publish Noted.Api -c Release -o ${{env.DOTNET_ROOT}}/myapp
 
       - name: Upload artifact for deployment job
