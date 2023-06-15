@@ -11,7 +11,7 @@ namespace Noted.Api.Services
         {
             _db = db;
         }
-
+        // hi
         public IEnumerable<Note> GetNotes() 
         {
             return _db.Notes.Where(note => note.deleted == false).ToList();
