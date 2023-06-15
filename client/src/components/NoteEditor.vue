@@ -21,6 +21,7 @@
               :model-value="currentNote?.title"
               @input="editNoteTitle($event.target.value)"
               variant="underlined"
+              placeholder="insert title..."
             ></v-text-field>
             <v-textarea
               :model-value="currentNote?.content"
