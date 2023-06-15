@@ -40,6 +40,7 @@
 </template>
 
 <script setup lang="ts">
+// hi
 import Axios from 'axios'
 import { ref } from 'vue'
 import type { INote } from './HomeView.vue'

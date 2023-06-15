@@ -9,6 +9,7 @@ namespace Noted.Api.Controllers
     [Route("Note")]
     public class NoteController : ControllerBase
     {
+        // hi
         private readonly NoteService _noteService;
         public NoteController(NoteService noteService)
         {
